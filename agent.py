@@ -45,22 +45,26 @@ def main():
         instructions=[
             f"Research the latest financial data for the ticker: {ticker}.",
             "Focus on the 2024 and 2025 financial results if available.",
-            "Retrieve specific metrics: Revenue (Receita), Net Income (Lucro Líquido), and Market Cap (Valor de Mercado) in BRL.",
-            "Ensure you cite your sources for every financial number using [SOURCE X] syntax.",
-            "If a metric is not found, state 'Data not found in sources'.",
-            "Use standard currency formatting in BRL (e.g., 'R$ 12.34 Billion' or 'R$ 12.34 Billion').",
-            "Avoid non-standard terms like 'Bíléis'. Use 'Billion' or 'Trillion' for large numbers.",
-            "Try to find specific annual or quarterly results for the most recent periods.",
+            "Retrieve Revenue, Net Income, and Market Cap in BRL.",
+            "Also search for P/E Ratio, Debt-to-Equity, and Interest Coverage Ratio.",
+            "CRITICAL: EVERY single number, including ratios and percentages, MUST have an explicit source citation (e.g., [SOURCE 1]).",
+            "If a metric is missing, explicitly state where you searched (e.g., 'Data not found in sources [Yahoo, Bloomberg]').",
+            "Use standard currency formatting (e.g., 'R$ 12.34 Billion').",
+            "Maintain strict formatting consistency: no double spaces, clean line breaks.",
+            "Market Cap MUST be verified with an 'As of [Date]' clarification and source citation.",
+            "Key Highlights MUST include at least 3-4 specific metrics (e.g. EBITDA, ROE) with explicit citations for each.",
         ],
         output_schema=FinancialReport,
         markdown=False,
     )
 
     prompt = (
-        f"Generate a detailed financial report for {ticker} in JSON format. "
+        f"Generate a professional, highly consistent financial report for {ticker} in JSON format. "
         "Keys: ticker, company_name, revenue_brl, net_income_brl, market_cap_brl, key_highlights, sources. "
-        "All financial values MUST be strings including the R$ symbol and formatted clearly (e.g. R$ 100.00 Billion). "
-        "Every single number in the report MUST have a source citation immediately following it."
+        "Every single metric in the report MUST be followed by an explicit citation in the string. "
+        "Format: 'R$ 100 Billion (FY 2024) [SOURCE 1]' or '15.4x [SOURCE 2]'. "
+        "The 'key_highlights' MUST contain specific metrics with their respective citations. "
+        "Ensure all citations are listed in the 'sources' key with their URLs."
     )
 
     try:
