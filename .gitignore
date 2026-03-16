@@ -1,2 +1,5 @@
 venv
 .env
+bin/
+.last_score
+eval_history.jsonl
