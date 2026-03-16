@@ -48,15 +48,19 @@ def main():
             "Retrieve specific metrics: Revenue (Receita), Net Income (Lucro Líquido), and Market Cap (Valor de Mercado) in BRL.",
             "Ensure you cite your sources for every financial number using [SOURCE X] syntax.",
             "If a metric is not found, state 'Data not found in sources'.",
+            "Use standard currency formatting in BRL (e.g., 'R$ 12.34 Billion' or 'R$ 12.34 Billion').",
+            "Avoid non-standard terms like 'Bíléis'. Use 'Billion' or 'Trillion' for large numbers.",
+            "Try to find specific annual or quarterly results for the most recent periods.",
         ],
         output_schema=FinancialReport,
         markdown=False,
     )
 
     prompt = (
-        f"Generate a financial report for {ticker} in JSON format with the following keys: "
-        "ticker, company_name, revenue_brl, net_income_brl, market_cap_brl, key_highlights, sources. "
-        "Ensure all financial values are strings and include the R$ symbol."
+        f"Generate a detailed financial report for {ticker} in JSON format. "
+        "Keys: ticker, company_name, revenue_brl, net_income_brl, market_cap_brl, key_highlights, sources. "
+        "All financial values MUST be strings including the R$ symbol and formatted clearly (e.g. R$ 100.00 Billion). "
+        "Every single number in the report MUST have a source citation immediately following it."
     )
 
     try:
